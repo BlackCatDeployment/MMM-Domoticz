@@ -136,6 +136,13 @@
                     todayEnergy=dev.CounterToday
                     powerUse=dev.Usage
                  }
+		 else if (dev.HardwareType == 'Linky' && dev.SubType == 'Energy'){
+                    kwh1=dev.CounterDeliv;
+                    kwh2=dev.CounterDelivToday;
+                    usedEnergy=dev.Counter - this.config.smartMeterOffset;
+                    todayEnergy=dev.CounterToday;
+                    powerUse=dev.Usage;
+                 }
                  if (dev.HardwareType == 'P1 Smart Meter USB' && dev.SubType == 'Gas'){
                     usedGas=dev.Counter - this.config.smartMeterGasOffset;
                     wtt=dev.CounterToday.split(' ');
