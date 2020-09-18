@@ -207,11 +207,18 @@
               // use icons arrow up for open arrow down for close (no need for translation)
               blinds += trClassSmall + dev.Name + '&nbsp;' + tdClassOpenSmall + (dev.Status=="Closed"?'yellow':'')+'"><i class="fa fa-arrow-' + (dev.Status=="Closed"?'down':'up') + '"></i>' + endLine;
           }
-          if (dev.Type == "Light/Switch" && (dev.SwitchType == "Door Contact" || dev.SwitchType == "Contact")){
+          if (dev.Type == "Light/Switch") {
+            if (dev.SwitchType == "Door Contact" || dev.SwitchType == "Contact") {
               // add to make sure sensors are added for display
               sensorCount++;
               // use icons toggle on for open toggle off for close (no need for translation)
               sensor += trClassSmall + dev.Name + '&nbsp;' + tdClassOpenSmall + (dev.Status=="Closed"?'green':'red')+'"><i class="fa fa-toggle-' + (dev.Status=="Closed"?'off':'on') + tdEndOpenSmall + endLine;
+            } else if (dev.SwitchType == "On/Off") {
+               // add to make sure sensors are added for display
+              sensorCount++;
+              // use icons toggle on for open toggle off for close (no need for translation)
+              sensor += trClassSmall + dev.Name + '&nbsp;' + tdClassOpenSmall + (dev.Status=="Off"?'green':'red')+'"><i class="fa fa-toggle-' + (dev.Status=="Off"?'off':'on') + tdEndOpenSmall + endLine;
+            }
           }
           if (dev.HardwareName == "SO Pulse counter"){
               pulseCount++;
