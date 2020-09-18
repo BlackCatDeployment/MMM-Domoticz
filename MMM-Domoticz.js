@@ -89,7 +89,7 @@
        power = headClass + this.config.energyTitle + headTab;
        batt = headClass + this.config.batteryTitle + headTab;
        co = headClass + this.config.coTitle + headTab;
-       blinds = headClass + this.config.moduleTitle + headTab;
+       blinds = headClass + this.config.blindsTitle + headTab;
        alarm = headClass + this.config.alarmTitle + headTab;
        sensor = headClass + this.config.sensorTitle + headTab;
        pulse = headClass + this.config.pulseLabel + headTab;
