@@ -105,7 +105,7 @@
         var dev=data.result[i];
         // Check if the device has been excluded. if not step through
         if ((this.config.excludeDevices.indexOf(dev.Name) == -1  && this.config.onlyShowExcluded === false) ||
-             (this.config.excludeDevices.indexOf(dev.Name) >= -1  && this.config.onlyShowExcluded === true) ) {
+             (this.config.excludeDevices.indexOf(dev.Name) > -1  && this.config.onlyShowExcluded === true) ) {
            // Device is reconized by Usage and only active if in config.js
            if ((dev.Usage || dev.Type == "RFXMeter" || dev.HardwareType == 'P1 Smart Meter USB') && this.config.showItems.indexOf('usage')!== -1 ){
               if (this.config.smartMeter==false){
