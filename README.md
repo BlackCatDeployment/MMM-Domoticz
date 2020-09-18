@@ -17,7 +17,7 @@ http://<domoticzIP>:<domoticzPort>/json.htm?type=devices&used=true&order=Name
 ```
 
 ## Installation
-1. Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/spoturdeal/MMM-Domoticz.git`.
+1. Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/BlackCatDeployment/MMM-Domoticz.git`.
 2. Add the module inside `config.js` placing it where you prefer ;)
 
 
