@@ -1,11 +1,20 @@
 # MMM-Domoticz
 
-This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module allows you read data from your Domiticz Home Center
+This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module allows you read data from your Domoticz Home Center
 
 ## Important message
 
-Due to a great number of requests that I am not able to implement, mostly simply because I don't have the same devices connected to my Domoticz system there will be no more new features added to this module.
-In the past some addiditions have been made that probably is only used by the user that requested it. It is not possible to award every request. 
+I resume the huge work of SpoturDeal (thanks to him again!), mainly because I have new devices to manage.
+
+Due to the lot of possible configurations, I cannot be able to satisfy all requests.
+
+In order to try to help the community by adding new Domoticz devices, I always use Postman or any API tester to get the JSON returned by Domoticz.
+
+Create a request with the JSON part of the device you want in MMM-Domoticz by using this URL:
+
+```
+http://<domoticzIP>:<domoticzPort>/json.htm?type=devices&used=true&order=Name
+```
 
 ## Installation
 1. Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/spoturdeal/MMM-Domoticz.git`.
@@ -29,6 +38,7 @@ In the past some addiditions have been made that probably is only used by the us
 |`voltageTitle`| Voltage title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Voltage/Current</i>|
 |`alarmTitle`| Alarm title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Alarm system</i>|
 |`alarmLabel`| Alarm label. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Current alarm status:</i>|
+|`alertTitle`| Alert title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Current alert status</i>|
 |`rainLabel`| Rain label. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Rain meter:</i>|
 |`energyNow`| The text for the energy you currently use. <br>**Type:** `string`<br>**Default:** <i>Currently</i>|
 |`energyTotal`| The text of total energy used. <br>**Type:** `string`<br>**Default:** <i>Total used</i>|
@@ -42,7 +52,7 @@ In the past some addiditions have been made that probably is only used by the us
 |`temperatureTitle`| Defines the temperature text.<br/>**Type:** `string`<br>**Default:** <i>Current temperatures Domoticz</i>|
 |`batteryThreshold`|Below this value it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>15</i>||
 |`coThreshold`|Above this level in ppm it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>700</i>|
-|`showItems`| The items you like to show. <br> **Type** `array`<br> One of the following: `temperature, energy,battery,co,blinds,humidity,baro,usage,voltage,alarm,sensor,pulse,meter` <br> **Default** <i>`['temperature','energy','usage','meter']`</i> |
+|`showItems`| The items you like to show. <br> **Type** `array`<br> One of the following: `temperature, energy,battery,co,blinds,humidity,baro,usage,voltage,alarm,sensor,pulse,meter,rain,alert` <br> **Default** <i>`['temperature','energy','usage','meter']`</i> |
 |`subMenus`| Set if you want separate menus.<br/>**Type:** `boolean`<br>**Options:** true, false<br>**Default:** <i>true</i>|
 |`smartMeter`| Set to true if you use a P1 USB smart meter.<br/>**Type:** `boolean`<br>**Options:** true, false<br>**Default:** <i>false</i>|
 |`smartMeterOffset`| Set the beginning value of your smart meter.<br/>**Type:** `integer`<br>**Default:** <i>0</i>|
@@ -79,7 +89,7 @@ Here is an example of an entry in `config.js`
 		subMenus: true,
 		smartMeter: false,
 		smartMeterOffset: 0,
-		showItems: ['temperature','energy','battery','co','blinds','humidity','baro','usage','voltage','alarm','sensor','pulse','meter','rain'],   
+		showItems: ['temperature','energy','battery','co','blinds','humidity','baro','usage','voltage','alarm','sensor','pulse','meter','rain','alert'],   
 		excludeDevices: ['none','add your own'],  // Device that will not be shown
 		onlyShowExcluded: false, // if true only exluded devices are shown
 		textWhite: false,
@@ -101,26 +111,35 @@ Added Humidity and Barometric pressure. Must be added in config.js to be shown g
 
 ## 23th April 2018
 Added current use of Watts please update config.js showItems with 'usage'
+
 Added total and todays use of energy in kWh.
 
 ## 24th October 2018
 Added alarm status requested by jacha05
+
 Added Voltage and current requested by offgridonrocker
+
 Changed error in example config.js (typo in excludedDevices is now excludeDevices).
 
 ## 15th Januari 2019
 Added Alarm system texts update the config if needed
+
 Re-Added Sensors made by BlackCatDeployment
+
 Restructured layout scripts. 
 
 ## 21st May 2019 v1.18
 Added support for SmartMeter p1 through USB
+
 Added SmartMeter offset requested by 1kOhm
+
 Changed excluded device to make it possible to only show selected Device requested by RienduPre
+
 Changed power usage metering if using a smartmeter requested by RienduPre
 
 ## 25th May 2019 v1.24
 Added smartMeter for Gas and Water
+
 Added support for SO pulse meters
 
 ## 26th May 2019 v1.26
@@ -129,10 +148,22 @@ Added meter values
 ## 30th June 2019 v1.35
 Added rain meter
 
+## 18th September 2020 v1.40
+Bugfixes
+
+Added Linky for energy item
+
+Added Alert item
+
+Added Switch on/off for sensor item
+
+
 The MIT License (MIT)
 =====================
 
 Copyright © 2019 SpoturDeal - Carl
+
+Copyright © 2020 BlackCatDeployment
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
