@@ -1,7 +1,8 @@
 /* Magic Mirror
  * Module: MagicMirror-Domoticz-Module
- * version 1.36 01st July 2019
+ * version 1.40 September 19 2020
  * By SpoturDeal https://github.com/SpoturDeal
+ * Forked By BlackCatDeployment https://github.com/BlackCatDeployment
  * MIT Licensed.
  */
  Module.register('MMM-Domoticz', {
@@ -25,6 +26,7 @@
         voltageTitle: "Voltage/Current",
         alarmTitle: "Alarm system",
         alarmLabel: "Current alarm status",
+	alertTitle: "Current alert status",
         pulseLabel: "Pulse meters",
         rainLabel: "Rain",
         coTitle: "CO2 level",
@@ -39,7 +41,7 @@
         waterTotal: "Total used H2O",                   // Label for total registred water used
         waterToday: "Today used H2O",                   // Label for water used today
         showItems: ['temperature','energy','battery','co',
-                    'blinds','humdity','baro','usage','voltage','alarm','sensor','pulse','meter','rain'],
+                    'blinds','humdity','baro','usage','voltage','alarm','sensor','pulse','meter','rain','alert'],
         alarmOffLabel: "Security Disarmed",
         alarmOnLabel: "Security Armed",            
         smartMeter: false,
@@ -70,7 +72,7 @@
 	render: function(data){
     // recieved data
     var text = '<div>';
-    var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; humi=""; baro=""; tempName=""; volt=""; alarm=""; sensor="";pulse=""; rain="";
+    var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; humi=""; baro=""; tempName=""; volt=""; alarm=""; sensor="";pulse=""; rain=""; alrt="";
     // set the most used html parts as variables
     var headClass='<header class="module-header sub-header">';
     var headTab='</header><table'+this.setTextColour()+' class="sub-header">';
@@ -92,13 +94,14 @@
        sensor = headClass + this.config.sensorTitle + headTab;
        pulse = headClass + this.config.pulseLabel + headTab;
        rain = headClass + this.config.rainLabel + headTab;
+       alrt = headClass + this.config.alertTitle + headTab;
     } else {
        // make a single table without suBMenus
        text += headClass + this.config.moduleTitle + headTab;
     }
     // Set the counters to zero important if using submodules.
     var powerUse=0; usedEnergy=0; todayEnergy=0; usedGas=0; todayGas=0;usedWater=0;todayWater=0;kwh1=0;kwh2=0;
-    var powerCount=0; tempCount=0; coCount=0; batteryCount=0;blindsCount=0;voltageCount=0;alarmCount=0;sensorCount=0;pulseCount=0;rainCount=0;
+    var powerCount=0; tempCount=0; coCount=0; batteryCount=0;blindsCount=0;voltageCount=0;alarmCount=0;sensorCount=0;pulseCount=0;rainCount=0;alertCount=0;
     // loop the length of the received json file
     for (i=0;i<data.result.length;i++){
         // set for one device
@@ -250,6 +253,24 @@
                  voltageCount++;
                  voltage += trClassSmall + dev.Name + '&nbsp;' + tdClassOpenSmall + dev.Data+'">' + endLine;
               }
+	      if (dev.SubType == "Alert"){
+                  alertCount++;
+                  switch (dev.Level) {
+                     case 1:
+                        alertColor = "green"
+                        break;
+                     case 2:
+                        alertColor = "yellow"
+                        break;
+                     case 3:
+                        alertColor = "orange"
+                        break;
+                     case 4:
+                        alertColor = "red"
+                        break;
+                  }
+                  alrt += trClassSmall + dev.Name +'&nbsp;' + tdClassOpenSmall + alertColor + tdEndOpenSmall + dev.Data + endLine;
+               }
             }
           }
           if (dev.Name == "Domoticz Security Panel"){
@@ -338,6 +359,7 @@
        sensor += endTable;
        pulse += endTable;
        rain += endTable;
+       alrt += endTable;
     }
     // Check which items are chose in config.js then add for Mirror
     if (tempCount >0 ){    text += (this.config.showItems.indexOf('temperature') !== -1?therm:''); }
@@ -350,6 +372,7 @@
     if (sensorCount > 0){  text += (this.config.showItems.indexOf('sensor') !== -1?sensor:'');  }
     if (pulseCount > 0){  text += (this.config.showItems.indexOf('pulse') !== -1?pulse:'');  }
     if (rainCount > 0){  text += (this.config.showItems.indexOf('rain') !== -1?rain:'');  }
+    if (alertCount > 0){  text += (this.config.showItems.indexOf('alert') !== -1?alrt:'');  }
 
     if (this.config.showItems.indexOf('usage')!== -1 ){
           if (this.config.subMenus === true) { text +=  endTable; }
