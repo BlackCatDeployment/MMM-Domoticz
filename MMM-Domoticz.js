@@ -219,8 +219,8 @@
             } else if (dev.SwitchType == "On/Off") {
                // add to make sure sensors are added for display
               sensorCount++;
-              // use icons toggle on for open toggle off for close (no need for translation)
-              sensor += trClassSmall + dev.Name + '&nbsp;' + tdClassOpenSmall + (dev.Status=="Off"?'green':'red')+'"><i class="fa fa-toggle-' + (dev.Status=="Off"?'off':'on') + tdEndOpenSmall + endLine;
+              // use icons toggle on for on toggle off for off (no need for translation)
+              sensor += trClassSmall + dev.Name + '&nbsp;' + tdClassOpenSmall + (dev.Status=="Off"?'white':'yellow')+'"><i class="fa fa-toggle-' + (dev.Status=="Off"?'off':'on') + tdEndOpenSmall + endLine;
             }
           }
           if (dev.HardwareName == "SO Pulse counter"){
