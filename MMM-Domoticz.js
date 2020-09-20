@@ -247,8 +247,8 @@
               batt += trClassOpenSmall +(dev.BatteryLevel < this.config.batteryThreshold - 8?'red':'')+'">' + dev.Name +'&nbsp;' + tdClassOpenSmall +(dev.BatteryLevel< 15?'red':'') + '"><i class="fa fa-battery-' + batteryIcon + '"></i> ' + dev.BatteryLevel + '%'  + endLine;
           }
           if (dev.Type=="General"){
-            if (dev.subType){
-              if (dev.subType == "Voltage" || dev.subType == "Current"){
+            if (dev.SubType){
+              if (dev.SubType == "Voltage" || dev.SubType == "Current"){
                  // For both current and voltage */
                  voltageCount++;
                  voltage += trClassSmall + dev.Name + '&nbsp;' + tdClassOpenSmall + dev.Data+'">' + endLine;
